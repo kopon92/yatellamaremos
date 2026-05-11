@@ -1,704 +1,418 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ya Te Llamaremos — Formación Actoral Delante de Cámara</title>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --black: #0d0d0d;
-      --dark: #111111;
-      --darker: #0a0a0a;
-      --blue: #3a4fd4;
-      --blue-light: #4a5fe4;
-      --white: #ffffff;
-      --grey: #888888;
-      --light-grey: #cccccc;
-      --border: rgba(255,255,255,0.1);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: 'Barlow', sans-serif;
-      font-weight: 300;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 48px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
-    }
-
-    .nav-logo {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: 0.05em;
-      color: var(--blue);
-      text-transform: uppercase;
-      line-height: 1.2;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 40px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--white);
-      text-decoration: none;
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      opacity: 0.85;
-      transition: opacity 0.2s;
-    }
-
-    .nav-links a:hover { opacity: 1; }
-
-    /* HERO */
-    .hero {
-      position: relative;
-      height: 100vh;
-      min-height: 700px;
-      display: flex;
-      align-items: flex-end;
-      overflow: hidden;
-    }
-
-    .hero-img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      padding: 0 48px 80px;
-      max-width: 600px;
-    }
-
-    .hero-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: clamp(60px, 10vw, 100px);
-      line-height: 0.9;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 20px;
-      animation: fadeUp 0.9s ease both;
-    }
-
-    .hero-sub {
-      font-size: 13px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--white);
-      font-weight: 400;
-      margin-bottom: 36px;
-      animation: fadeUp 0.9s 0.15s ease both;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 14px 32px;
-      border: 1.5px solid var(--white);
-      color: var(--white);
-      text-decoration: none;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      transition: background 0.25s, color 0.25s;
-      animation: fadeUp 0.9s 0.3s ease both;
-      cursor: pointer;
-      background: transparent;
-    }
-
-    .btn:hover { background: var(--white); color: var(--black); }
-
-    .btn-blue {
-      background: var(--blue);
-      border-color: var(--blue);
-    }
-
-    .btn-blue:hover { background: var(--blue-light); color: var(--white); }
-
-    /* SECTIONS */
-    .section-dark { background: var(--darker); padding: 100px 48px; }
-    .section-mid  { background: var(--black);  padding: 100px 48px; }
-
-    .two-col {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .section-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: clamp(32px, 5vw, 52px);
-      text-transform: uppercase;
-      line-height: 1;
-      margin-bottom: 24px;
-    }
-
-    .divider {
-      width: 40px;
-      height: 2px;
-      background: var(--blue);
-      margin-bottom: 28px;
-    }
-
-    .section-text {
-      font-size: 15px;
-      color: var(--light-grey);
-      font-weight: 300;
-      line-height: 1.8;
-    }
-
-    .section-text p + p { margin-top: 16px; }
-
-    .monitor-img { width: 100%; border-radius: 4px; display: block; }
-
-    .section-center { text-align: center; margin-bottom: 60px; max-width: 1100px; margin-left: auto; margin-right: auto; }
-
-    .cards {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-
-    .card img {
-      width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      display: block;
-      margin-bottom: 20px;
-      transition: filter 0.3s;
-    }
-
-    .card-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 10px;
-    }
-
-    .card-text { font-size: 14px; color: var(--light-grey); font-weight: 300; line-height: 1.7; }
-
-    /* PARA QUIÉN */
-    .section-para-quien {
-      background: var(--darker);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 480px;
-    }
-
-    .para-quien-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-    }
-
-    .para-quien-content {
-      padding: 80px 64px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    /* PRECIOS */
-    .section-precios { background: var(--black); padding: 100px 48px; }
-
-    .pricing-header {
-      max-width: 1100px;
-      margin: 0 auto 60px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
-    }
-
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--grey);
-      margin-bottom: 12px;
-    }
-
-    .pricing-header-img {
-      width: 100%;
-      max-height: 340px;
-      object-fit: cover;
-      object-position: center top;
-    }
-
-    .pricing-cards {
-      max-width: 1100px;
-      margin: 0 auto 60px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .pricing-card {
-      border: 1px solid var(--border);
-      padding: 40px 32px;
-      position: relative;
-      transition: border-color 0.3s;
-    }
-
-    .pricing-card:hover { border-color: rgba(255,255,255,0.25); }
-    .pricing-card.featured { border-color: var(--blue); }
-
-    .badge {
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--blue);
-      color: var(--white);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 4px 16px;
-      white-space: nowrap;
-    }
-
-    .pricing-plan {
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--blue);
-      font-weight: 400;
-      text-align: center;
-      margin-bottom: 12px;
-    }
-
-    .pricing-divider {
-      width: 32px;
-      height: 1.5px;
-      background: var(--blue);
-      margin: 0 auto 28px;
-    }
-
-    .pricing-features {
-      list-style: none;
-      text-align: center;
-      margin-bottom: 36px;
-    }
-
-    .pricing-features li {
-      font-size: 14px;
-      color: var(--light-grey);
-      padding: 7px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .pricing-features li:last-child { border-bottom: none; }
-
-    .pricing-price { text-align: center; margin-bottom: 8px; }
-
-    .price-amount {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: 56px;
-      line-height: 1;
-    }
-
-    .price-period { font-size: 14px; color: var(--grey); font-weight: 300; }
-
-    .price-note { text-align: center; font-size: 12px; color: var(--grey); margin-bottom: 32px; }
-
-    .pricing-btn {
-      display: block;
-      width: 100%;
-      text-align: center;
-      padding: 14px;
-      border: 1.5px solid var(--white);
-      color: var(--white);
-      text-decoration: none;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      transition: background 0.25s, color 0.25s;
-      cursor: pointer;
-      background: transparent;
-    }
-
-    .pricing-card.featured .pricing-btn { background: var(--blue); border-color: var(--blue); }
-    .pricing-btn:hover { background: var(--white); color: var(--black); }
-    .pricing-card.featured .pricing-btn:hover { background: var(--blue-light); border-color: var(--blue-light); color: var(--white); }
-
-    .features-row {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 40px;
-      padding: 60px 0 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .feature-item { display: flex; flex-direction: column; gap: 10px; }
-
-    .feature-icon { width: 36px; height: 36px; opacity: 0.6; }
-
-    .feature-title { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
-
-    .feature-desc { font-size: 13px; color: var(--grey); font-weight: 300; line-height: 1.5; }
-
-    /* CTA */
-    .cta-banner {
-      background: var(--darker);
-      padding: 60px 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 40px;
-    }
-
-    .cta-left { display: flex; align-items: center; gap: 40px; }
-
-    .cta-img {
-      width: 160px;
-      height: 200px;
-      object-fit: cover;
-      object-position: center top;
-      flex-shrink: 0;
-    }
-
-    .cta-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: clamp(28px, 4vw, 44px);
-      text-transform: uppercase;
-    }
-
-    .cta-right { display: flex; align-items: center; gap: 48px; flex-shrink: 0; }
-
-    .cta-text { font-size: 14px; color: var(--light-grey); max-width: 280px; line-height: 1.6; }
-
-    /* FOOTER */
-    footer {
-      background: var(--black);
-      border-top: 1px solid var(--border);
-      padding: 32px 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .footer-logo {
-      color: var(--blue);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 13px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      line-height: 1.2;
-    }
-
-    .footer-center { font-size: 12px; color: var(--grey); letter-spacing: 0.08em; }
-
-    .footer-icons { display: flex; gap: 20px; align-items: center; }
-
-    .footer-icons a { color: var(--white); opacity: 0.6; transition: opacity 0.2s; display: flex; }
-    .footer-icons a:hover { opacity: 1; }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-    /* MOBILE */
-    @media (max-width: 768px) {
-      nav { padding: 16px 24px; }
-      .nav-links { display: none; }
-      .hero-content { padding: 0 24px 60px; }
-      .section-dark, .section-mid, .section-precios { padding: 60px 24px; }
-      .two-col, .cards, .pricing-header, .pricing-cards { grid-template-columns: 1fr; gap: 32px; }
-      .features-row { grid-template-columns: 1fr 1fr; gap: 28px; }
-      .section-para-quien { grid-template-columns: 1fr; }
-      .para-quien-img { height: 300px; }
-      .para-quien-content { padding: 40px 24px; }
-      .cta-banner { flex-direction: column; align-items: flex-start; padding: 40px 24px; }
-      .cta-right { flex-direction: column; align-items: flex-start; gap: 24px; }
-      footer { flex-direction: column; gap: 20px; text-align: center; padding: 32px 24px; }
-    }
-  </style>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ya Te Llamaremos — Formación Actoral Delante de Cámara</title>
+    <link rel="icon" type="image/png" href="img/logo_blue_cropped.png"/>
+    <meta name="description" content="Ya Te Llamaremos es una formación actoral delante de cámara: castings, self tapes, separatas y dirección de actores. Grupos reducidos, equipo profesional y feedback honesto."/>
+    <link rel="canonical" href="https://yatellamaremos.com/"/>
+    <meta property="og:type"        content="website"/>
+    <meta property="og:url"         content="https://yatellamaremos.com/"/>
+    <meta property="og:title"       content="Ya Te Llamaremos — Formación Actoral Delante de Cámara"/>
+    <meta property="og:description" content="Formación actoral delante de cámara: castings, self tapes, separatas y dirección. Grupos reducidos y feedback honesto."/>
+    <meta property="og:image"       content="https://yatellamaremos.com/img/hero.png"/>
+    <meta property="og:locale"      content="es_ES"/>
+    <meta property="og:site_name"   content="Ya Te Llamaremos"/>
+    <meta name="twitter:card"        content="summary_large_image"/>
+    <meta name="twitter:title"       content="Ya Te Llamaremos — Formación Actoral Delante de Cámara"/>
+    <meta name="twitter:description" content="Formación actoral delante de cámara: castings, self tapes, separatas y dirección. Grupos reducidos y feedback honesto."/>
+    <meta name="twitter:image"       content="https://yatellamaremos.com/img/hero.png"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500&display=swap"
+          rel="stylesheet"/>
+    <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
+<!-- NAV -->
+<nav>
     <div class="nav-logo">Ya Te<br>Llamaremos</div>
     <ul class="nav-links">
-      <li><a href="#formacion">Formación</a></li>
-      <li><a href="#metodologia">Metodología</a></li>
-      <li><a href="#para-quien">Para Quién</a></li>
-      <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#formacion">Formación</a></li>
+        <li><a href="#metodologia">Metodología</a></li>
+        <li><a href="#para-quien">Para Quién</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#quien-soy">¿Quién soy?</a></li>
     </ul>
-  </nav>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <img src="portrait_woman.png" alt="Actriz frente a cámara" class="hero-img"/>
+<main>
+<!-- HERO -->
+<section class="hero">
+    <img src="img/portrait_woman.png" alt="Actriz frente a cámara" class="hero-img" fetchpriority="high"/>
     <div class="hero-content">
-      <h1 class="hero-title">Ya Te<br>Llamaremos</h1>
-      <p class="hero-sub">Formación Actoral<br>Delante de Cámara</p>
-      <a href="#contacto" class="btn">Quiero Castings</a>
+        <h1 class="hero-title">Ya Te<br>Llamaremos</h1>
+        <p class="hero-sub">Formación Actoral<br>Delante de Cámara</p>
+        <a href="#contacto" class="btn">Quiero Castings</a>
     </div>
-  </section>
+</section>
 
-  <!-- NO ES OTRA ESCUELA -->
-  <section class="section-dark" id="formacion">
+<!-- NO ES OTRA ESCUELA -->
+<section class="section-dark" id="formacion">
     <div class="two-col">
-      <div class="fade-in">
-        <h2 class="section-title">No Es Otra<br>Escuela</h2>
-        <div class="divider"></div>
-        <div class="section-text">
-          <p>Aquí no vienes a interpretar.<br>Vienes a entender cómo funciona la cámara, el casting y la industria.</p>
-          <p>Trabajamos desde lo real, desde lo que ocurre cuando alguien te mira a 50mm y no puedes esconderte.</p>
+        <div class="fade-in">
+            <h2 class="section-title">No Es Otra<br>Escuela</h2>
+            <div class="divider"></div>
+            <div class="section-text">
+                <p>Aquí no vienes a interpretar. Vienes a entender cómo funciona la cámara, el casting y la
+                    industria.</p>
+                <p>Trabajamos interpretación delante de cámara desde un lugar honesto, técnico y profundamente humano.
+                    Aprenderás cómo funciona la escucha real, el ritmo interno, la presencia y la verdad en plano corto.
+                    Porque la cámara no premia "hacer". Premia estar.</p>
+                <p>Cada clase está enfocada en situaciones reales de industria: castings, self tapes, separatas,
+                    dirección de actores y trabajo emocional frente a cámara. Sin fórmulas vacías. Sin ejercicios que se
+                    quedan solo en el aula.</p>
+                <p>Cada actor y actriz tiene bloqueos, energía, tempos y herramientas distintas. Aquí no se trabaja en
+                    masa. Se trabaja mirando, afinando y entendiendo qué necesita cada persona para crecer de verdad
+                    delante de cámara.</p>
+                <p>Queremos que salgas de aquí entendiendo no solo cómo actuar, sino cómo sostener un plano, cómo
+                    defender un casting y cómo conectar con verdad cuando no tienes dónde esconderte. Porque al final,
+                    la cámara siempre ve más de lo que uno cree.</p>
+            </div>
         </div>
-      </div>
-      <div class="fade-in">
-        <img src="camera.png" alt="Monitor de cámara profesional" class="monitor-img"/>
-      </div>
+        <div class="fade-in">
+            <img src="img/que__hacemos.png" alt="Monitor de cámara profesional" class="monitor-img" loading="lazy"/>
+        </div>
     </div>
-  </section>
+</section>
 
-  <!-- QUÉ HACEMOS -->
-  <section class="section-mid" id="metodologia">
+<!-- QUÉ HACEMOS -->
+<section class="section-mid" id="metodologia">
     <div class="section-center fade-in">
-      <h2 class="section-title">Qué Hacemos</h2>
+        <h2 class="section-title">Qué Hacemos</h2>
     </div>
-    <div class="cards">
-      <div class="card fade-in">
-        <img src="entrenamiento_delante_de_camara.jpg" alt="Entrenamiento frente a cámara"/>
-        <div class="card-title">Entrenamiento<br>Frente a Cámara</div>
-        <p class="card-text">Naturalidad, escucha, presencia.<br>Nada de sobreactuar.</p>
-      </div>
-      <div class="card fade-in">
-        <img src="simulacion_casting.jpg" alt="Simulación de casting real"/>
-        <div class="card-title">Simulación<br>de Casting Real</div>
-        <p class="card-text">Aprende a defenderte en self tapes y pruebas presenciales.</p>
-      </div>
-      <div class="card fade-in">
-        <img src="que__hacemos.png" alt="Corrección directa"/>
-        <div class="card-title">Corrección<br>Directa</div>
-        <p class="card-text">Feedback honesto.<br>Sin azúcar. Como en la industria.</p>
-      </div>
-    </div>
-  </section>
+    <div class="carousel-wrap">
+        <button class="carousel-btn carousel-prev" aria-label="Anterior">&#8592;</button>
+        <div class="carousel-viewport">
+            <div class="carousel-track">
 
-  <!-- PARA QUIÉN -->
-  <section class="section-para-quien" id="para-quien">
-    <img src="portrait_man.png" alt="Actor en sesión" class="para-quien-img"/>
+                <div class="carousel-slide">
+                    <img src="img/entrenamiento_delante_de_camara.jpg" alt="Entrenamiento frente a cámara" loading="lazy"/>
+                    <div class="carousel-body">
+                        <div class="card-title">Entrenamiento<br>Frente a Cámara</div>
+                        <p class="card-text">Aprende a sostener un plano, escuchar de verdad y defender un monólogo delante de cámara sin artificios. Trabajamos presencia, naturalidad y verdad en primer plano.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <img src="img/separatas.jpeg" alt="Separatas" loading="lazy"/>
+                    <div class="carousel-body">
+                        <div class="card-title">Separatas</div>
+                        <p class="card-text">Entrenamos escenas y textos reales pasando por distintos géneros: drama, comedia, thriller y ficción contemporánea. Para que aprendas a adaptarte a cualquier registro y situación de casting.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <img src="img/simulacion_casting.jpg" alt="Simulación de casting real" loading="lazy"/>
+                    <div class="carousel-body">
+                        <div class="card-title">Simulación<br>de Casting Real</div>
+                        <p class="card-text">Trabajamos castings presenciales y self tapes como ocurre en la industria. Aprenderás a preparar mejor, decidir más rápido y afinar en menos intentos.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <img src="img/que__hacemos.png" alt="Corrección directa" loading="lazy"/>
+                    <div class="carousel-body">
+                        <div class="card-title">Feedback<br>real</div>
+                        <p class="card-text">Correcciones honestas, directas y personalizadas en cada clase. Detectamos qué necesitas mejorar y reforzamos aquello que ya funciona para que avances con conciencia y criterio.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <img src="img/camera.png" alt="Aprendizaje continuo" loading="lazy"/>
+                    <div class="carousel-body">
+                        <div class="card-title">Aprendizaje<br>Continuo</div>
+                        <p class="card-text">Clases mensuales de septiembre a julio. Sin parar.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <img src="img/direccion_verdad.jpeg" alt="Dirección en escena" loading="lazy"/>
+                    <div class="carousel-body">
+                        <div class="card-title">Dirección<br>y verdad en Escena</div>
+                        <p class="card-text">Aprende a leer la escena y sostener verdad en cada plano.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <button class="carousel-btn carousel-next" aria-label="Siguiente">&#8594;</button>
+    </div>
+    <div class="carousel-dots"></div>
+</section>
+
+<!-- PARA QUIÉN -->
+<section class="section-para-quien" id="para-quien">
+    <img src="img/portrait_man.png" alt="Actor en sesión" class="para-quien-img" loading="lazy"/>
     <div class="para-quien-content fade-in">
-      <h2 class="section-title">Para<br>Quién Es</h2>
-      <div class="divider"></div>
-      <div class="section-text">
-        <p>Actores y actrices que quieren trabajar. Que ya están cansados de formaciones bonitas pero inútiles.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRECIOS -->
-  <section class="section-precios" id="precios">
-    <div class="pricing-header fade-in">
-      <div>
-        <p class="section-label">Precios</p>
-        <h2 class="section-title">Cuánto Cuesta<br>Hacerlo en Serio</h2>
+        <h2 class="section-title">Para<br>Quién Es</h2>
         <div class="divider"></div>
         <div class="section-text">
-          <p>No vendemos cursos sueltos.<br>Vendemos el proceso real de enfrentarte a cámara.</p>
+            <p>Para actores y actrices que quieren trabajar de verdad. Y que ya están cansados de formaciones bonitas
+                pero vacías.</p>
         </div>
-      </div>
-      <img src="cuanto_cuesta_hacerlo.png" alt="Actor" class="pricing-header-img"/>
+    </div>
+</section>
+
+<!-- PRECIOS -->
+<section class="section-precios" id="precios">
+    <div class="pricing-header fade-in">
+        <div>
+            <p class="section-label">Precios</p>
+            <h2 class="section-title">Cuánto Cuesta<br>Hacerlo en Serio</h2>
+            <div class="divider"></div>
+            <div class="section-text">
+                <p>No vendemos cursos sueltos.<br>Vendemos el proceso real de enfrentarte a cámara.</p>
+            </div>
+        </div>
+        <img src="img/cuanto_cuesta_hacerlo.png" alt="Actor" class="pricing-header-img" loading="lazy"/>
     </div>
 
     <div class="pricing-cards">
-      <div class="pricing-card fade-in">
-        <div class="pricing-plan">1 Clase / Mes</div>
-        <div class="pricing-divider"></div>
-        <ul class="pricing-features">
-          <li>Entrenamiento frente a cámara</li>
-          <li>Simulación de casting real</li>
-          <li>Corrección directa</li>
-          <li>Grabación de escenas</li>
-          <li>Feedback personalizado</li>
-        </ul>
-        <div class="pricing-price">
-          <span class="price-amount">140€</span><span class="price-period">/mes</span>
+        <div class="pricing-card fade-in">
+            <div class="pricing-plan">1 Clase / Mes</div>
+            <div class="pricing-divider"></div>
+            <ul class="pricing-features">
+                <li>Entrenamiento frente a cámara</li>
+                <li>Simulación de casting real</li>
+                <li>Corrección directa</li>
+                <li>Grabación de escenas</li>
+                <li>Feedback personalizado</li>
+            </ul>
+            <div class="pricing-price">
+                <span class="price-amount">140€</span><span class="price-period">/mes</span>
+            </div>
+            <p class="price-note">Duración mínima: 2 meses</p>
+            <a href="#contacto" class="pricing-btn">Elegir Plan</a>
         </div>
-        <p class="price-note">Duración mínima: 2 meses</p>
-        <a href="#contacto" class="pricing-btn">Elegir Plan</a>
-      </div>
 
-      <div class="pricing-card featured fade-in">
-        <div class="badge">Mejor Opción</div>
-        <div class="pricing-plan">2 Clases / Mes</div>
-        <div class="pricing-divider"></div>
-        <ul class="pricing-features">
-          <li>Entrenamiento frente a cámara</li>
-          <li>Simulación de casting real</li>
-          <li>Corrección directa</li>
-          <li>Grabación de escenas</li>
-          <li>Feedback personalizado</li>
-        </ul>
-        <div class="pricing-price">
-          <span class="price-amount">180€</span><span class="price-period">/mes</span>
+        <div class="pricing-card featured fade-in">
+            <div class="badge">Mejor Opción</div>
+            <div class="pricing-plan">2 Clases / Mes</div>
+            <div class="pricing-divider"></div>
+            <ul class="pricing-features">
+                <li>Entrenamiento frente a cámara</li>
+                <li>Simulación de casting real</li>
+                <li>Corrección directa</li>
+                <li>Grabación de escenas</li>
+                <li>Feedback personalizado</li>
+            </ul>
+            <div class="pricing-price">
+                <span class="price-amount">180€</span><span class="price-period">/mes</span>
+            </div>
+            <p class="price-note">Duración mínima: 2 meses</p>
+            <a href="#contacto" class="pricing-btn">Elegir Plan</a>
         </div>
-        <p class="price-note">Duración mínima: 2 meses</p>
-        <a href="#contacto" class="pricing-btn">Elegir Plan</a>
-      </div>
 
-      <div class="pricing-card fade-in">
-        <div class="pricing-plan">Anual</div>
-        <div class="pricing-divider"></div>
-        <ul class="pricing-features">
-          <li>Entrenamiento frente a cámara</li>
-          <li>Simulación de casting real</li>
-          <li>Corrección directa</li>
-          <li>Grabación de escenas</li>
-          <li>Feedback personalizado</li>
-        </ul>
-        <div class="pricing-price">
-          <span class="price-amount">1782€</span><span class="price-period">/año</span>
+        <div class="pricing-card fade-in">
+            <div class="pricing-plan">Anual</div>
+            <div class="pricing-divider"></div>
+            <ul class="pricing-features">
+                <li>Entrenamiento frente a cámara</li>
+                <li>Simulación de casting real</li>
+                <li>Corrección directa</li>
+                <li>Grabación de escenas</li>
+                <li>Feedback personalizado</li>
+            </ul>
+            <div class="pricing-price">
+                <span class="price-amount">1782€</span><span class="price-period">/año</span>
+            </div>
+            <p class="price-note">(10% de descuento)</p>
+            <a href="#contacto" class="pricing-btn">Elegir Plan</a>
         </div>
-        <p class="price-note">(10% de descuento)</p>
-        <a href="#contacto" class="pricing-btn">Elegir Plan</a>
-      </div>
     </div>
 
     <div class="features-row">
-      <div class="feature-item fade-in">
-        <svg class="feature-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="18" cy="12" r="6" stroke="white" stroke-width="1.5"/>
-          <path d="M6 30c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <div class="feature-title">Grupos Reducidos</div>
-        <div class="feature-desc">Atención real y personalizada</div>
-      </div>
-      <div class="feature-item fade-in">
-        <svg class="feature-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="10" width="22" height="16" rx="2" stroke="white" stroke-width="1.5"/>
-          <path d="M26 15l6-4v14l-6-4" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
-        </svg>
-        <div class="feature-title">Equipo Profesional</div>
-        <div class="feature-desc">Cámara, sonido y dirección</div>
-      </div>
-      <div class="feature-item fade-in">
-        <svg class="feature-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M28 6H8a2 2 0 00-2 2v14a2 2 0 002 2h8l4 6 4-6h4a2 2 0 002-2V8a2 2 0 00-2-2z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
-        </svg>
-        <div class="feature-title">Feedback Honesto</div>
-        <div class="feature-desc">Sin filtros. Sin rodeos.</div>
-      </div>
-      <div class="feature-item fade-in">
-        <svg class="feature-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="8" width="28" height="20" rx="2" stroke="white" stroke-width="1.5"/>
-          <path d="M4 15h28M14 8v7M22 8v7" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <div class="feature-title">Experiencia Real</div>
-        <div class="feature-desc">Como en un casting de verdad</div>
-      </div>
+        <div class="feature-item fade-in">
+            <svg class="feature-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="18" cy="12" r="6" stroke="white" stroke-width="1.5"/>
+                <path d="M6 30c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="white" stroke-width="1.5"
+                      stroke-linecap="round"/>
+            </svg>
+            <div class="feature-title">Grupos Reducidos</div>
+            <div class="feature-desc">Grupos pequeños para poder trabajar de forma personalizada, cuidar cada proceso y dar espacio real a cada actor delante de cámara.</div>
+        </div>
+        <div class="feature-item fade-in">
+            <svg class="feature-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="10" width="22" height="16" rx="2" stroke="white" stroke-width="1.5"/>
+                <path d="M26 15l6-4v14l-6-4" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+            <div class="feature-title">Equipo Profesional</div>
+            <div class="feature-desc">Cámara, sonido y dirección</div>
+        </div>
+        <div class="feature-item fade-in">
+            <svg class="feature-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M28 6H8a2 2 0 00-2 2v14a2 2 0 002 2h8l4 6 4-6h4a2 2 0 002-2V8a2 2 0 00-2-2z" stroke="white"
+                      stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+            <div class="feature-title">Feedback Honesto</div>
+            <div class="feature-desc">Sin filtros. Sin rodeos.</div>
+        </div>
+        <div class="feature-item fade-in">
+            <svg class="feature-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="8" width="28" height="20" rx="2" stroke="white" stroke-width="1.5"/>
+                <path d="M4 15h28M14 8v7M22 8v7" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <div class="feature-title">Experiencia Real</div>
+            <div class="feature-desc">Como en un casting de verdad</div>
+        </div>
+        <div class="feature-item fade-in">
+            <svg class="feature-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="18" cy="10" r="4" stroke="white" stroke-width="1.5"/>
+              <path d="M10 28c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="8" cy="13" r="3" stroke="white" stroke-width="1.5"/>
+              <path d="M2 28c0-3.314 2.686-6 6-6" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="28" cy="13" r="3" stroke="white" stroke-width="1.5"/>
+              <path d="M34 28c0-3.314-2.686-6-6-6" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <div class="feature-title">Comunidad</div>
+            <div class="feature-desc">Formarás parte de un grupo privado donde compartimos castings, materiales, próximas temáticas y acompañamiento constante entre actores y actrices.</div>
+        </div>
     </div>
-  </section>
+</section>
 
-  <!-- CTA -->
-  <section class="cta-banner" id="contacto">
-    <div class="cta-left">
-      <img src="portrait_woman.png" alt="Actriz" class="cta-img"/>
-      <h2 class="cta-title">¿Te Interesa?</h2>
-    </div>
-    <div class="cta-right">
-      <p class="cta-text">Escríbenos y te contamos próximos grupos, precios y disponibilidad.</p>
-      <a href="mailto:info@yatellamaremos.com" class="btn btn-blue">Escríbenos</a>
-    </div>
-  </section>
+<!-- CTA -->
+<section class="cta-banner" id="contacto">
+  <div class="cta-inner">
+    <p class="cta-text">Escríbenos y te contamos cómo formar parte de YA TE LLAMAREMOS.<br><br>Entrena, equivócate,
+        afina y prepárate para cuando llegue la llamada.</p>
+    <a href="mailto:info@yatellamaremos.com" class="btn btn-blue">Escríbenos</a>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-logo"><img src="logo_blue_cropped.png" alt="Ya Te Llamaremos" style="height:48px; width:auto;"/></div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-logo"><img src="img/logo_blue_cropped.png" alt="Ya Te Llamaremos"
+                                  style="height:48px; width:auto;" loading="lazy"/></div>
     <div class="footer-center">Formación actoral delante de cámara</div>
     <div class="footer-icons">
-      <a href="#" aria-label="Instagram">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5"/>
-          <circle cx="12" cy="12" r="4"/>
-          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-        </svg>
-      </a>
-      <a href="mailto:info@yatellamaremos.com" aria-label="Email">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="4" width="20" height="16" rx="2"/>
-          <path d="M2 7l10 7 10-7"/>
-        </svg>
-      </a>
+        <a href="#" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+        </a>
+        <a href="mailto:info@yatellamaremos.com" aria-label="Email">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="M2 7l10 7 10-7"/>
+            </svg>
+        </a>
     </div>
-  </footer>
+</footer>
 
-  <script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Ya Te Llamaremos",
+  "description": "Formación actoral delante de cámara: castings, self tapes, separatas y dirección de actores.",
+  "url": "https://yatellamaremos.com",
+  "logo": "https://yatellamaremos.com/img/logo_blue_cropped.png",
+  "email": "info@yatellamaremos.com",
+  "inLanguage": "es",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "1 Clase / Mes",
+      "price": "140",
+      "priceCurrency": "EUR",
+      "description": "Entrenamiento frente a cámara, simulación de casting, feedback personalizado."
+    },
+    {
+      "@type": "Offer",
+      "name": "2 Clases / Mes",
+      "price": "180",
+      "priceCurrency": "EUR",
+      "description": "Entrenamiento frente a cámara, simulación de casting, feedback personalizado."
+    },
+    {
+      "@type": "Offer",
+      "name": "Plan Anual",
+      "price": "1782",
+      "priceCurrency": "EUR",
+      "description": "Plan anual con 10% de descuento."
+    }
+  ]
+}
+</script>
+
+<script>
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(el => {
-        if (el.isIntersecting) el.target.classList.add('visible');
-      });
-    }, { threshold: 0.12 });
+        entries.forEach(el => {
+            if (el.isIntersecting) el.target.classList.add('visible');
+        });
+    }, {threshold: 0.12});
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
     document.querySelectorAll('.cards .card').forEach((c, i) => {
-      c.style.transitionDelay = `${i * 0.12}s`;
+        c.style.transitionDelay = `${i * 0.12}s`;
     });
     document.querySelectorAll('.pricing-card').forEach((c, i) => {
-      c.style.transitionDelay = `${i * 0.1}s`;
+        c.style.transitionDelay = `${i * 0.1}s`;
     });
     document.querySelectorAll('.feature-item').forEach((c, i) => {
-      c.style.transitionDelay = `${i * 0.08}s`;
+        c.style.transitionDelay = `${i * 0.08}s`;
     });
-  </script>
+    // CAROUSEL
+    const track = document.querySelector('.carousel-track');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dotsContainer = document.querySelector('.carousel-dots');
+    const visibleCount = () => window.innerWidth <= 768 ? 1 : 3;
+    let current = 0;
+
+    function buildDots() {
+        dotsContainer.innerHTML = '';
+        const count = slides.length - visibleCount() + 1;
+        for (let i = 0; i < count; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `Slide ${i + 1}`);
+            dot.addEventListener('click', () => goTo(i));
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function goTo(index) {
+        const max = slides.length - visibleCount();
+        current = Math.max(0, Math.min(index, max));
+        const slideWidth = slides[0].getBoundingClientRect().width + 24;
+        track.style.transform = `translateX(-${current * slideWidth}px)`;
+        dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
+            d.classList.toggle('active', i === current);
+        });
+    }
+
+    buildDots();
+
+    function nextSlide() {
+      const max = slides.length - visibleCount();
+      goTo(current >= max ? 0 : current + 1);
+    }
+
+    let autoplay = setInterval(nextSlide, 3000);
+
+    function resetAutoplay() {
+      clearInterval(autoplay);
+      autoplay = setInterval(nextSlide, 3000);
+    }
+
+    document.querySelector('.carousel-prev').addEventListener('click', () => { goTo(current - 1); resetAutoplay(); });
+    document.querySelector('.carousel-next').addEventListener('click', () => { goTo(current + 1); resetAutoplay(); });
+    dotsContainer.addEventListener('click', resetAutoplay);
+    window.addEventListener('resize', () => {
+        buildDots();
+        goTo(current);
+    });
+
+</script>
 </body>
 </html>
