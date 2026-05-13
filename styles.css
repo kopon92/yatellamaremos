@@ -2,7 +2,6 @@
 
 :root {
   --black: #0d0d0d;
-  --dark: #111111;
   --darker: #0a0a0a;
   --blue: #3a4fd4;
   --blue-light: #4a5fe4;
@@ -179,8 +178,6 @@ nav {
   margin-bottom: 24px;
 }
 
-.divider { display: none; }
-
 .section-title::after,
 .cta-heading::after {
   content: '';
@@ -209,23 +206,6 @@ nav {
 .monitor-img { width: 100%; border-radius: 4px; display: block; }
 
 .section-center { text-align: center; margin-bottom: 60px; max-width: 1100px; margin-left: auto; margin-right: auto; }
-
-.cards {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-}
-
-.card img {
-  width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  display: block;
-  margin-bottom: 20px;
-  transition: filter 0.3s;
-}
 
 .card-title {
   font-family: 'Barlow Condensed', sans-serif;
@@ -351,14 +331,6 @@ nav {
   margin-bottom: 36px;
 }
 
-.pricing-desc {
-  font-size: 14px;
-  color: var(--light-grey);
-  line-height: 1.65;
-  text-align: center;
-  margin-bottom: 36px;
-}
-
 .pricing-features li {
   font-size: 15px;
   color: var(--light-grey);
@@ -378,8 +350,6 @@ nav {
 }
 
 .price-period { font-size: 14px; color: var(--grey); font-weight: 300; }
-
-.price-note { text-align: center; font-size: 13px; color: var(--grey); margin-bottom: 32px; }
 
 .pricing-btn {
   display: block;
@@ -581,6 +551,8 @@ footer {
   line-height: 1.2;
 }
 
+.footer-logo img { height: 48px; width: auto; }
+
 .footer-center { font-size: 13px; color: var(--grey); letter-spacing: 0.08em; }
 
 .footer-icons { display: flex; gap: 20px; align-items: center; }
@@ -652,7 +624,7 @@ footer {
   .section-dark, .section-mid, .section-precios,
   .section-para-quien, .section-coach, .section-testimonios,
   .cta-banner { padding: 60px 24px; }
-  .two-col, .cards, .pricing-cards, .pricing-intro,
+  .two-col, .pricing-cards, .pricing-intro,
   .para-quien-inner, .coach-inner { grid-template-columns: 1fr; gap: 32px; }
   .pricing-intro-img { height: 240px; }
   .features-row { grid-template-columns: 1fr 1fr; gap: 28px; }
@@ -660,6 +632,8 @@ footer {
   .para-quien-img { height: 340px; object-fit: cover; object-position: center top; }
   .cta-inner { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; }
   .cta-left { width: 100%; }
+  .cta-right { width: 100%; }
+  .cta-btn { width: 100%; text-align: center; }
   footer { flex-direction: column; gap: 20px; text-align: center; padding: 32px 24px; }
 }
 

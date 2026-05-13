@@ -66,7 +66,7 @@
         <div class="two-col">
             <div class="fade-in">
                 <h2 class="section-title">No Es Otra<br> Escuela</h2>
-                <div class="divider"></div>
+
                 <div class="section-text">
                     <p>Aquí no vienes a interpretar. Vienes a entender cómo funciona la cámara, el casting y la
                         industria.</p>
@@ -175,7 +175,7 @@
             <img src="img/para-quien.png" alt="Actor en sesión" class="para-quien-img" loading="lazy"/>
             <div class="para-quien-content fade-in">
                 <h2 class="section-title">¿Para<br> Quién Es?</h2>
-                <div class="divider"></div>
+
                 <div class="section-text">
                     <p>Para actores y actrices que quieren trabajar de verdad.
                         Para quienes sienten que todavía pueden afinar más su relación con la cámara y llevar su
@@ -388,7 +388,7 @@
             <div class="coach-content fade-in">
                 <p class="section-label">El Coach</p>
                 <h2 class="section-title">Abel<br> Jurado</h2>
-                <div class="divider"></div>
+
                 <div class="section-text">
                     <p>Actor, filmmaker y coach actoral especializado en interpretación delante de cámara.</p>
                     <p>Durante los últimos años ha combinado el trabajo audiovisual con la dirección de actores y actrices,
@@ -423,8 +423,7 @@
 
 <!-- FOOTER -->
 <footer>
-    <a href="#" class="footer-logo"><img src="img/logo.png" alt="Ya Te Llamaremos"
-                                  style="height:48px; width:auto;" loading="lazy"/></a>
+    <a href="#" class="footer-logo"><img src="img/logo.png" alt="Ya Te Llamaremos" loading="lazy"/></a>
     <div class="footer-center">Formación actoral delante de cámara</div>
     <div class="footer-icons">
         <a href="https://www.instagram.com/ytll_actors/" aria-label="Instagram" target="_blank">
@@ -465,27 +464,24 @@
       "offers": [
         {
           "@type": "Offer",
-          "name": "Iniciación",
-          "price": "120",
+          "name": "Plan Flexible",
+          "price": "140",
           "priceCurrency": "EUR",
-          "description": "Base frente a cámara, ejercicios de naturalidad, grabaciones simples.",
-          "eligibleDuration": { "@type": "QuantitativeValue", "value": 2, "unitCode": "MON" }
+          "description": "Paga clase a clase con mayor libertad y flexibilidad según tu disponibilidad."
         },
         {
           "@type": "Offer",
-          "name": "Programa Real",
+          "name": "Plan Continuidad",
           "price": "180",
           "priceCurrency": "EUR",
-          "description": "Simulación de casting real, trabajo de escenas, corrección directa en film, grabación profesional, feedback personalizado.",
-          "eligibleDuration": { "@type": "QuantitativeValue", "value": 2, "unitCode": "MON" }
+          "description": "Compromiso de dos clases al mes para entrenar con constancia y evolucionar más rápido."
         },
         {
           "@type": "Offer",
-          "name": "Avanzado",
-          "price": "250",
+          "name": "Plan Anual",
+          "price": "1780",
           "priceCurrency": "EUR",
-          "description": "Preparación específica para casting, mentoring directo, material profesional.",
-          "eligibleDuration": { "@type": "QuantitativeValue", "value": 2, "unitCode": "MON" }
+          "description": "Entrena durante todo el año con un 10% de descuento sobre el precio mensual."
         }
       ],
       "review": [
@@ -517,7 +513,7 @@
       "jobTitle": "Coach actoral y director de actores",
       "description": "Actor, filmmaker y coach actoral especializado en interpretación delante de cámara. Ha acompañado a más de 400 actores en procesos de entrenamiento, casting y trabajo frente a cámara.",
       "url": "https://yatellamaremos.com/#coach",
-      "image": "https://yatellamaremos.com/img/coach.png",
+      "image": "https://yatellamaremos.com/img/coach-abel-jurado.jpeg",
       "worksFor": {
         "@type": "EducationalOrganization",
         "name": "Ya Te Llamaremos"
@@ -528,114 +524,6 @@
 }
 </script>
 
-<script>
-    // HAMBURGER
-    const hamburger = document.querySelector('.nav-hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    hamburger.addEventListener('click', () => {
-        const open = navLinks.classList.toggle('open');
-        hamburger.classList.toggle('open', open);
-        hamburger.setAttribute('aria-expanded', open);
-    });
-    navLinks.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => {
-            navLinks.classList.remove('open');
-            hamburger.classList.remove('open');
-            hamburger.setAttribute('aria-expanded', false);
-        });
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(el => {
-            if (el.isIntersecting) el.target.classList.add('visible');
-        });
-    }, {threshold: 0.12});
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    const sections = document.querySelectorAll('section[id]');
-    const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
-    const scrollSpy = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                navAnchors.forEach(a => a.classList.remove('active'));
-                const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
-                if (active) active.classList.add('active');
-            }
-        });
-    }, { rootMargin: '-40% 0px -55% 0px' });
-    sections.forEach(s => scrollSpy.observe(s));
-
-
-    document.querySelectorAll('.pricing-card').forEach((c, i) => {
-        c.style.transitionDelay = `${i * 0.1}s`;
-    });
-    document.querySelectorAll('.feature-item').forEach((c, i) => {
-        c.style.transitionDelay = `${i * 0.08}s`;
-    });
-
-    // CAROUSEL — supports multiple instances via data-visible attribute
-    function initCarousel(wrap) {
-        const track = wrap.querySelector('.carousel-track');
-        const origSlides = Array.from(wrap.querySelectorAll('.carousel-slide'));
-        const n = origSlides.length;
-        const dotsContainer = wrap.parentElement.querySelector('.carousel-dots');
-        const desktopVisible = parseInt(wrap.dataset.visible || '3', 10);
-        const visibleCount = () => window.innerWidth <= 768 ? 1 : desktopVisible;
-        let current = 0;
-
-        origSlides.forEach(s => track.appendChild(s.cloneNode(true)));
-
-        function buildDots() {
-            dotsContainer.innerHTML = '';
-            const count = n - visibleCount() + 1;
-            for (let i = 0; i < count; i++) {
-                const dot = document.createElement('button');
-                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-                dot.setAttribute('aria-label', `Slide ${i + 1}`);
-                dot.addEventListener('click', () => goTo(i));
-                dotsContainer.appendChild(dot);
-            }
-        }
-
-        function goTo(index, animate = true) {
-            const allSlides = wrap.querySelectorAll('.carousel-slide');
-            if (!animate) track.style.transition = 'none';
-            current = index;
-            const slideWidth = allSlides[0].getBoundingClientRect().width + 24;
-            track.style.transform = `translateX(-${current * slideWidth}px)`;
-            const dotCount = dotsContainer.children.length;
-            dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
-                d.classList.toggle('active', i === current % dotCount);
-            });
-            if (!animate) {
-                track.getBoundingClientRect();
-                track.style.transition = '';
-            }
-        }
-
-        buildDots();
-
-        track.addEventListener('transitionend', () => {
-            if (current >= n) goTo(current - n, false);
-            else if (current < 0) goTo(current + n, false);
-        });
-
-        let autoplay = setInterval(() => goTo(current + 1), 3000);
-
-        function resetAutoplay() {
-            clearInterval(autoplay);
-            autoplay = setInterval(() => goTo(current + 1), 3000);
-        }
-
-        wrap.querySelector('.carousel-prev').addEventListener('click', () => { goTo(current - 1); resetAutoplay(); });
-        wrap.querySelector('.carousel-next').addEventListener('click', () => { goTo(current + 1); resetAutoplay(); });
-        dotsContainer.addEventListener('click', resetAutoplay);
-        window.addEventListener('resize', () => { buildDots(); goTo(current, false); });
-    }
-
-    document.querySelectorAll('.carousel-wrap').forEach(initCarousel);
-
-</script>
+<script src="main.js" defer></script>
 </body>
 </html>
