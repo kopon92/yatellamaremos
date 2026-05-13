@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://yatellamaremos.com/sitemap.xml
+Sitemap: https://yatellamaremos.es/sitemap.xml
